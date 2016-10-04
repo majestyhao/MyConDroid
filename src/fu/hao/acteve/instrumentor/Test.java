@@ -28,11 +28,9 @@ public class Test {
     private static final String TAG = Test.class.getSimpleName();
 
     public static void main(String[] args) {
-
         //initialise the options set
-        //Options.v().set_android_jars("/home/android-sdk-linux/platforms/");
-        Options.v().set_force_android_jar("D:/workspace/ConDroid/libs/android-19.jar");
-        //Options.v().set_soot_classpath(".:/usr/lib/jvm/java-7-oracle/jre/lib/rt.jar");
+        Options.v().set_android_jars("C:/Users/hao/Downloads/android-sdk-windows/platforms/");
+        //Options.v().set_force_android_jar("D:/workspace/ConDroid/libs/android-19.jar");
         Options.v().set_soot_classpath("C:/Users/hao/Downloads/android-sdk-windows/platforms/android-19/android.jar");
         Options.v().set_process_dir(Collections.singletonList("D:/workspace/Button1/app/app-release.apk"));
         Options.v().set_allow_phantom_refs(true);
@@ -43,6 +41,7 @@ public class Test {
         //output as APK, too//-f J
         //Options.v().set_output_format(Options.output_format_jimple);
         Options.v().set_output_format(Options.output_format_dex);
+
 
         PackManager.v().getPack("jtp").add(new Transform("jtp.myInstrumenter", new BodyTransformer() {
 
