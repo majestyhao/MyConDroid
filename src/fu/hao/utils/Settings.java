@@ -32,10 +32,10 @@ public class Settings {
 	private static int logLevel = Log.MODE_MSG;
 	private static Set<String> targetMethods = new HashSet<String>();
 
-	private static String appDirectory = null;
-	private static String appName = null;
-	private static String outputDirectory = null;
-	private static String androidLib = null;
+	private static String appDirectory = "";
+	private static String appName = "";
+	private static String outputDirectory = "";
+	private static String androidLib = "";
 
 	private static boolean printOutput = true;
 	private static boolean printConstraints = false;

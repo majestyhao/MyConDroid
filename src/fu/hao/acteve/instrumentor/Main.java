@@ -1,5 +1,6 @@
 package fu.hao.acteve.instrumentor;
 
+import fu.hao.utils.Log;
 import org.xml.sax.SAXException;
 import soot.*;
 import soot.jimple.infoflow.android.SetupApplication;
@@ -19,6 +20,7 @@ import java.util.*;
  * Date: 2016/10/2
  */
 public class Main extends SceneTransformer {
+    private static final String TAG = Main.class.getSimpleName();
 
     private static String apk = "";
     private static String libJars = "./jars/a3t_symbolic.jar";
@@ -116,6 +118,23 @@ public class Main extends SceneTransformer {
         Options.v().setPhaseOption("cg.spark", "on");
 
         Scene.v().loadNecessaryClasses();
+
+        for (SootClass clazz : Scene.v().getClasses()) {
+            Log.msg(TAG, clazz);
+        }
+
+        Options.v().set_soot_classpath("D:/workspace/ConDroid/libs/android-19.jar");
+
+        SootClass logClass = Scene.v().loadClassAndSupport("android.util.Log");
+
+        Log.msg(TAG, "number: " + logClass.getMethods().size());
+        for (SootMethod method : logClass.getMethods()) {
+            Log.msg(TAG, method);
+        }
+
+        SootMethod sm = logClass.getMethod("<android.util.Log: int i(java.lang.String,java.lang.String)>");
+
+        Scene.v().getMethod("<android.util.Log: int i(java.lang.String,java.lang.String)>");
 
     }
 
