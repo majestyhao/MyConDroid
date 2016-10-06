@@ -29,6 +29,7 @@ import java.util.Set;
  * Date: 7/14/2016 6:00 PM
  */
 public class Settings {
+	private static boolean debug = true;
 	private static int logLevel = Log.MODE_MSG;
 	private static Set<String> targetMethods = new HashSet<String>();
 
@@ -97,6 +98,14 @@ public class Settings {
 		METHODS,
 		NATIVE,
 		REFLECTION
+	}
+
+	public static boolean isDebug() {
+		return debug;
+	}
+
+	public static void setDebug(boolean debug) {
+		Settings.debug = debug;
 	}
 
 	static public TargetType Target = TargetType.METHODS;
