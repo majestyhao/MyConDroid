@@ -34,8 +34,8 @@ public class Settings {
 	private static Set<String> targetMethods = new HashSet<String>();
 
 	private static String appDirectory = "";
-	private static String appName = "";
-	private static String outputDirectory = "";
+	private static String appName = "Unknown";
+	private static String outputDirectory = "output";
 	private static String androidLib = "";
 
 	private static boolean printOutput = true;

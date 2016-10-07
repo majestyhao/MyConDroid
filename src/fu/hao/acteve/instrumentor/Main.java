@@ -6,6 +6,8 @@ import org.xml.sax.SAXException;
 import soot.*;
 import soot.jimple.infoflow.android.SetupApplication;
 import soot.jimple.infoflow.android.data.AndroidMethod;
+import soot.jimple.toolkits.callgraph.CallGraph;
+import soot.jimple.toolkits.callgraph.Edge;
 import soot.options.Options;
 import soot.util.Chain;
 
@@ -98,6 +100,109 @@ public class Main extends SceneTransformer {
             Log.msg(TAG, m.getSignature());
         }
 
+        // Step 3: Get the paths from the entry points to the target methods
+        //Map<SootMethod, List<SootMethod>> paths = new HashMap<>();
+        List<List<SootMethod>> paths = new ArrayList<>();
+        //
+
+        //for (SootMethod target : targetMethods) {
+
+        //List<SootMethod> path = new ArrayList<>();
+
+        //// Add all methods on the way to the call
+
+        //CallGraph subGraph = MethodUtils.findTransitiveCallersOf(target);
+
+        //Iterator<MethodOrMethodContext> methodsAlongThePath = subGraph.sourceMethods();
+
+        //while (methodsAlongThePath.hasNext()) {
+
+        //SootMethod methodAlongThePath = methodsAlongThePath.next().method();
+
+        //path.add(methodAlongThePath);
+
+        //}
+
+        ////paths.put(target, path);
+
+        //paths.add(path);
+
+        //}
+
+        //
+
+        //
+
+        //for (SootMethod goal : paths.keySet()) {
+
+        //Log.msg(TAG, paths.get(goal).size() + " methods along the path to " + goal.getSignature());
+
+        //List<SootMethod> along = paths.get(goal);
+
+        //for (SootMethod m:along) {
+
+        //Log.msg(TAG, "node: " + m.getSignature());
+
+        //}
+
+        //}
+
+        //for (List<SootMethod> path : paths) {
+
+        //Log.msg(TAG, "A path:");
+
+        //for (SootMethod sootMethod : path) {
+
+        //Log.msg(TAG, "node: " + sootMethod.getSignature());
+
+        //}
+
+        //}
+
+        // Leverage Dijkstra to find the shortest path
+        // TODO All paths
+        for (SootMethod target : targetMethods) {
+            CallGraph subGraph = MethodUtils.findSubCGIn(target);
+
+            for (SootMethod entry : MethodUtils.getEntries(subGraph)) {
+                DijkstraSP dijkstraSP = new DijkstraSP(subGraph, entry);
+                // print shortest path
+                if (dijkstraSP.hasPathTo(target)) {
+                    List<SootMethod> path = new ArrayList<>();
+                    //Log.msg(TAG, entry.getSubSignature() + " to " + target.getSubSignature() + ": " + dijkstraSP.distTo(target));
+                    List<Edge> edgePath = dijkstraSP.pathTo(target);
+                    for (Edge e : edgePath) {
+                        //Log.msg(TAG, "Node: " + e );
+                        path.add(e.src());
+                    }
+                    path.add(edgePath.get(edgePath.size() - 1).tgt());
+                    paths.add(path);
+                } else {
+                    Log.err(TAG, "Error in searching for paths.");
+                }
+
+                //
+                //for (SootMethod t : dijkstraSP.getVertices().keySet()) {
+                //if (dijkstraSP.hasPathTo(t)) {
+                //Log.msg(TAG, entry.getSubSignature() + " to " + t.getSubSignature() + ": " + dijkstraSP.distTo(t));
+                //for (Edge e : dijkstraSP.pathTo(t)) {
+                //Log.msg(TAG, "Node: " + e );
+                //}
+                //} else {
+                //Log.msg(TAG, entry.getSubSignature() + " to " + t.getSubSignature() + "   no path");
+                //}
+                //}
+
+            }
+        }
+
+        for (int i = 0; i < paths.size(); i++) {
+            List<SootMethod> path = paths.get(i);
+            Log.msg(TAG, "Path No." + i + ": " + path.get(0).getSubSignature() + " to " + path.get(path.size() - 1).getSubSignature());
+            for (SootMethod node : path) {
+                Log.msg(TAG, "node: " + node.getSignature());
+            }
+        }
         /*
         //Register all application classes for instrumentation
         Chain<SootClass> appclasses = Scene.v().getApplicationClasses();
@@ -176,9 +281,9 @@ public class Main extends SceneTransformer {
 
         // All packages which are not already in the app's transitive hull but
         // are required by the injected code need to be marked as dynamic.
-        Options.v().set_dynamic_package(
+        /*Options.v().set_dynamic_package(
                 Arrays.asList(new String[]{"acteve.symbolic.", "com.android", "models.", "org.json", "org.apache", "org.w3c",
-                        "org.xml", "junit", "javax", "javax.crypto"}));
+                        "org.xml", "junit", "javax", "javax.crypto"}));*/
 
 
         Scene.v().addBasicClass("android.util.Log", SIGNATURES);

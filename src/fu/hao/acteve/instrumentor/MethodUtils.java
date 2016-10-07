@@ -2,6 +2,7 @@ package fu.hao.acteve.instrumentor;
 
 import fu.hao.utils.Log;
 import polyglot.ast.Call;
+import soot.MethodOrMethodContext;
 import soot.Scene;
 import soot.SootClass;
 import soot.SootMethod;
@@ -10,10 +11,7 @@ import soot.jimple.toolkits.callgraph.Edge;
 import soot.util.Chain;
 import soot.util.HashChain;
 
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Description:
@@ -154,6 +152,15 @@ public class MethodUtils {
     }
 
     public static Set<SootMethod> findReachableTargets(Collection<SootMethod> startingPoints) {
+        /**
+         * Method: findReachableTargets
+         * Description: Find all reachable target methods from the starting points inside the call graph.
+         * @param [startingPoints]
+         * @throw
+         * @return java.util.Set<soot.SootMethod>
+         * @author Hao Fu(haofu@ucdavis.edu)
+         * @since 2016/10/5 20:00
+         */
         Set<SootMethod> targets = new HashSet<>();
         for (SootMethod sootMethod : findTransitiveCalleesOf(startingPoints)) {
             if (isTarget(sootMethod)) {
@@ -162,6 +169,93 @@ public class MethodUtils {
         }
 
         return targets;
+    }
+
+    public static CallGraph findTransitiveCallersOf(SootMethod sootMethod) {
+        /**
+         * Method: findTransitiveCallersOf
+         * Description: BFS to get all transitive reachable callers
+         * @param [sootMethod]
+         * @throw
+         * @return soot.jimple.toolkits.callgraph.CallGraph
+         * @author Hao Fu(haofu@ucdavis.edu)
+         * @since 2016/10/5 19:35
+         */
+
+        CallGraph callGraph = Scene.v().getCallGraph();
+        CallGraph subGraph = new CallGraph();
+
+        Queue<SootMethod> unprocessed  = new LinkedList<>();
+
+        unprocessed.add(sootMethod);
+
+        while (!unprocessed.isEmpty()) {
+            sootMethod = unprocessed.poll();
+            Iterator<Edge> edges = callGraph.edgesInto(sootMethod);
+
+            while (edges.hasNext()) {
+                Edge edge = edges.next();
+                if (!edge.getSrc().method().getSignature().contains("<dummyMainClass: void dummyMainMethod")) {
+                    SootMethod src = edge.src();
+
+                    if (!unprocessed.contains(src)) {
+                        unprocessed.add(src);
+                    }
+                    subGraph.addEdge(edge);
+                }
+            }
+        }
+
+        return subGraph;
+    }
+
+    public static CallGraph findSubCGIn(SootMethod sootMethod) {
+        /**
+         * Method: findSubCGOf
+         * Description: BFS to get the sub graph edges into the given
+         * @param [sootMethod]
+         * @throw
+         * @return soot.jimple.toolkits.callgraph.CallGraph
+         * @author Hao Fu(haofu@ucdavis.edu)
+         * @since 2016/10/5 19:35
+         */
+
+        CallGraph callGraph = Scene.v().getCallGraph();
+        CallGraph subGraph = new CallGraph();
+
+        Queue<SootMethod> unprocessed  = new LinkedList<>();
+
+        unprocessed.add(sootMethod);
+
+        while (!unprocessed.isEmpty()) {
+            sootMethod = unprocessed.poll();
+            Iterator<Edge> edges = callGraph.edgesInto(sootMethod);
+
+            while (edges.hasNext()) {
+                Edge edge = edges.next();
+                //if (!edge.getSrc().method().getSignature().contains("<dummyMainClass: void dummyMainMethod")) {
+                    SootMethod src = edge.src();
+
+                    if (!unprocessed.contains(src)) {
+                        unprocessed.add(src);
+                    }
+                    subGraph.addEdge(edge);
+                //}
+            }
+        }
+
+        return subGraph;
+    }
+
+    public static Set<SootMethod> getEntries(CallGraph callGraph) {
+        Set<SootMethod> entries = new HashSet<>();
+        for (Edge edge : callGraph) {
+            if (edge.src().getSignature().contains("<dummyMainClass")) {
+                entries.add(edge.tgt());
+            }
+        }
+
+        return entries;
     }
 
 }
