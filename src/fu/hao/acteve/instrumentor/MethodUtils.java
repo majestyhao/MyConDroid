@@ -136,7 +136,6 @@ public class MethodUtils {
          * @since 2016/10/5 19:15
          */
         SootClass declaringClass = sootMethod.getDeclaringClass();
-        Log.bb(TAG, declaringClass);
         for (String def : TARGET_DEF) {
             if (Scene.v().containsMethod(def)) {
                 SootMethod defMethod = Scene.v().getMethod(def);

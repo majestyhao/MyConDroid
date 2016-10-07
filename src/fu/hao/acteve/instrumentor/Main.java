@@ -101,7 +101,6 @@ public class Main extends SceneTransformer {
         }
 
         // Step 3: Get the paths from the entry points to the target methods
-        //Map<SootMethod, List<SootMethod>> paths = new HashMap<>();
         List<List<SootMethod>> paths = new ArrayList<>();
         //
 
@@ -203,6 +202,17 @@ public class Main extends SceneTransformer {
                 Log.msg(TAG, "node: " + node.getSignature());
             }
         }
+
+        // Get the lifecycle method to instrument
+        instrumentationHelper = new InstrumentationHelper(new File(apk));
+        SootMethod lcMethodToExtend = instrumentationHelper.getDefaultOnResume();
+        if (lcMethodToExtend == null) {
+            lcMethodToExtend = instrumentationHelper.getDefaultOnCreate();
+        }
+
+        assert lcMethodToExtend != null : "No default activity found!";
+        Log.msg(TAG, "Method to be instrumented: " + lcMethodToExtend);
+
         /*
         //Register all application classes for instrumentation
         Chain<SootClass> appclasses = Scene.v().getApplicationClasses();

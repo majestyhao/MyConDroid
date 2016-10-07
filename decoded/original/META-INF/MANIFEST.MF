@@ -6,28 +6,28 @@ Name: res/drawable-xhdpi-v4/ic_launcher.png
 SHA1-Digest: AfPh3OJoypH966MludSW6f1RHg4=
 
 Name: res/menu/activity_button1.xml
-SHA1-Digest: oIKYA89izLEHNJNPEGhgdpXlwnE=
+SHA1-Digest: zDZ+Ne9Bw1efaphlVlsF/FlfdtE=
 
 Name: AndroidManifest.xml
-SHA1-Digest: BgyfhkGEpwFTYyhvZz+ZOWKHR/A=
+SHA1-Digest: t4hhFnhWXJm2QJrQkHuwqcQKVtE=
 
 Name: res/drawable-hdpi-v4/ic_launcher.png
 SHA1-Digest: Nq8q3HeTluE5JNCBpVvNy3BXtJI=
 
 Name: res/menu/menu_activity2.xml
-SHA1-Digest: 6CRdD06qTUAkplUgxTYsz7XZ3sw=
+SHA1-Digest: 5Bu1p5TIddgdyF3xLmLQmaue/wk=
 
 Name: resources.arsc
-SHA1-Digest: gs3CK/kzZQiNK/6vj/SCeWqKOsY=
+SHA1-Digest: 1dkHjt7F2n3PEzfEg+9e2hNR8TQ=
 
 Name: res/drawable-mdpi-v4/ic_launcher.png
 SHA1-Digest: RRxOSvpmhVfCwiprVV/wZlaqQpw=
 
 Name: res/layout/activity_activity1.xml
-SHA1-Digest: QcVtXNbK9+4BEELu30IDRLxJ/qY=
+SHA1-Digest: ZLRGVkWbXnwhCUMMnFq4PPUDf4E=
 
 Name: classes.dex
-SHA1-Digest: AkQd/0AbEvFVkii7SoJN6PTTz7w=
+SHA1-Digest: q0RK3HODRfZDktBTSNd3oZK0NTs=
 
 Name: res/drawable-xxhdpi-v4/ic_launcher.png
 SHA1-Digest: GVIfdEOBv4gEny2T1jDhGGsZOBo=

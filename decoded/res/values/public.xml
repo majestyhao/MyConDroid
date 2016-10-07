@@ -15,6 +15,7 @@
     <public type="menu" name="activity_button1" id="0x7f070000" />
     <public type="menu" name="menu_activity2" id="0x7f070001" />
     <public type="id" name="button1" id="0x7f080000" />
-    <public type="id" name="menu_settings" id="0x7f080001" />
-    <public type="id" name="action_settings" id="0x7f080002" />
+    <public type="id" name="button2" id="0x7f080001" />
+    <public type="id" name="menu_settings" id="0x7f080002" />
+    <public type="id" name="action_settings" id="0x7f080003" />
 </resources>

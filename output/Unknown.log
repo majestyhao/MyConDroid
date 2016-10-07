@@ -1,0 +1,25 @@
+Main - [DEBUG]: Found entry: <de.ecspride.Activity1$1: void <init>(de.ecspride.Activity1)>
+Main - [DEBUG]: Found entry: <de.ecspride.Activity1$1: void onClick(android.view.View)>
+Main - [DEBUG]: Found entry: <de.ecspride.Activity1: void <clinit>()>
+Main - [DEBUG]: Found entry: <android.os.Bundle: void <init>()>
+Main - [DEBUG]: Found entry: <de.ecspride.Activity1: void <init>()>
+Main - [DEBUG]: Found entry: <de.ecspride.Activity1: void onCreate(android.os.Bundle)>
+Main - [DEBUG]: Found entry: <android.view.View: void <init>(android.content.Context)>
+Main - [DEBUG]: Found entry: <de.ecspride.Activity1$2: void <init>(de.ecspride.Activity1)>
+Main - [DEBUG]: Found entry: <de.ecspride.Activity1$2: void onClick(android.view.View)>
+Main - [MSG]: Found the following target methods:
+Main - [MSG]: <android.telephony.SmsManager: void sendTextMessage(java.lang.String,java.lang.String,java.lang.String,android.app.PendingIntent,android.app.PendingIntent)>
+Main - [MSG]: Path No.0: void onClick(android.view.View) to void sendTextMessage(java.lang.String,java.lang.String,java.lang.String,android.app.PendingIntent,android.app.PendingIntent)
+Main - [MSG]: node: <de.ecspride.Activity1$1: void onClick(android.view.View)>
+Main - [MSG]: node: <de.ecspride.Activity1: void access$000(de.ecspride.Activity1)>
+Main - [MSG]: node: <de.ecspride.Activity1: void sendMsgWrapper()>
+Main - [MSG]: node: <de.ecspride.Activity1: void sendMessage()>
+Main - [MSG]: node: <android.telephony.SmsManager: void sendTextMessage(java.lang.String,java.lang.String,java.lang.String,android.app.PendingIntent,android.app.PendingIntent)>
+Main - [MSG]: Path No.1: void onClick(android.view.View) to void sendTextMessage(java.lang.String,java.lang.String,java.lang.String,android.app.PendingIntent,android.app.PendingIntent)
+Main - [MSG]: node: <de.ecspride.Activity1$2: void onClick(android.view.View)>
+Main - [MSG]: node: <de.ecspride.Activity1: void access$100(de.ecspride.Activity1)>
+Main - [MSG]: node: <de.ecspride.Activity1: void sendMsgWrapper2()>
+Main - [MSG]: node: <de.ecspride.Activity1: void sendMessage()>
+Main - [MSG]: node: <android.telephony.SmsManager: void sendTextMessage(java.lang.String,java.lang.String,java.lang.String,android.app.PendingIntent,android.app.PendingIntent)>
+InstrumentationHelper - [DEBUG]: Decoding D:\workspace\TestConDroid\app\app-debug.apk
+Main - [MSG]: Method to be instrumented: <de.ecspride.Activity1: void onCreate(android.os.Bundle)>

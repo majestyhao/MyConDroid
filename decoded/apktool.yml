@@ -1,5 +1,5 @@
 version: 2.0.3
-apkFileName: app-release.apk
+apkFileName: app-debug.apk
 isFrameworkApk: false
 usesFramework:
   ids:
